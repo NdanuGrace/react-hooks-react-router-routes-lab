@@ -1,32 +1,32 @@
 import React, {useEffect, useState} from "react";
-// import { movies } from "../data";
+import { movies } from "../data";
 
 function Movies() {
-const[movies,setMovies] =useState([]);
-// const params= useParams()
-
-useEffect(() =>{
-  fetch("/movies")
-  .then(r => r.json())
-  .then(movies => setMovies(movies))
-}, [])
-
-const{title, name, genres} = movies
-
+  const movieItems = movies.map((movie) => (
+    <div key={movie.title}>
+      <h2>{movie.title}</h2>
+      <p>Runtime: {movie.time} min.</p>
+      <ul>
+        {movie.genres.map((genre) => (
+          <li key={genre}>{genre}</li>
+        ))}
+      </ul>
+    </div>
+  ));
 
   return (
-    <>
-    <h1> Movies Page</h1>
     <div>
-<h2>{title}</h2>
-<h3>{name}</h3>
-<div > {genres}</div>
-
+      <h1>Movies Page</h1>
+      {movieItems}
     </div>
-
-    </>
-  )
-   
-}
+  );
+};
 
 export default Movies;
+
+
+
+
+
+
+
